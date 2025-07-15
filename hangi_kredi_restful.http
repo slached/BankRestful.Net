@@ -1,0 +1,6 @@
+@hangi_kredi_restful_HostAddress = http://localhost:5057
+
+GET {{hangi_kredi_restful_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
