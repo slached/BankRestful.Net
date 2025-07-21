@@ -19,7 +19,7 @@ namespace hangi_kredi_restful.Controllers
         }
 
         [HttpGet("get")]
-        public ActionResult<ApiResponse<BankReturnType>> Get([FromQuery] int currentPage = 0, [FromQuery] int perPage = 10)
+        public async Task<ActionResult<ApiResponse<BankReturnType>>> Get([FromQuery] int currentPage = 0, [FromQuery] int perPage = 10)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace hangi_kredi_restful.Controllers
                 var response = new ApiResponse<BankReturnType>
                 {
                     Success = true,
-                    Data = data
+                    Data = await data
                 };
                 return Ok(response);
             }
@@ -40,7 +40,7 @@ namespace hangi_kredi_restful.Controllers
         }
 
         [HttpGet("get/{id}")]
-        public ActionResult<ApiResponse<BankDto>> GetById(int id)
+        public async Task<ActionResult<ApiResponse<BankDto>>> GetById(int id)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace hangi_kredi_restful.Controllers
                 var response = new ApiResponse<BankDto>
                 {
                     Success = true,
-                    Data = data
+                    Data = await data
                 };
                 return Ok(response);
             }
@@ -61,13 +61,13 @@ namespace hangi_kredi_restful.Controllers
         }
 
         [HttpPost("create")]
-        public ActionResult<ApiResponse<string>> Create([FromBody] BankDto bank)
+        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] BankDto bank)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                var _bank = _service.CreateBank(bank);
+                var _bank = await _service.CreateBank(bank);
                 return Ok(new ApiResponse<string> { Success = true, Data = $"{_bank.Name} created successfully." });
             }
             catch (Exception e)
@@ -78,11 +78,11 @@ namespace hangi_kredi_restful.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public ActionResult<ApiResponse<string>> DeleteById(int id)
+        public async Task<ActionResult<ApiResponse<string>>> DeleteById(int id)
         {
             try
             {
-                var data = _service.DeleteBank(id);
+                var data = await _service.DeleteBank(id);
 
                 var response = new ApiResponse<string>
                 {
@@ -99,11 +99,11 @@ namespace hangi_kredi_restful.Controllers
         }
 
         [HttpPatch("update/{id}")]
-        public ActionResult<ApiResponse<string>> UpdateById(int id, [FromBody] BankDto updatedBank)
+        public async Task<ActionResult<ApiResponse<string>>> UpdateById(int id, [FromBody] BankDto updatedBank)
         {
             try
             {
-                var data = _service.UpdateBank(id, updatedBank);
+                var data = await _service.UpdateBank(id, updatedBank);
 
                 var response = new ApiResponse<string>
                 {

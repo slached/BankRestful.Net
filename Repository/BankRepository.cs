@@ -1,6 +1,7 @@
 ﻿using hangi_kredi_restful.Data;
 using hangi_kredi_restful.Entities;
 using hangi_kredi_restful.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace hangi_kredi_restful.Repository
 {
@@ -12,42 +13,42 @@ namespace hangi_kredi_restful.Repository
             _context = context;
         }
 
-        public int CountBankAmount()
+        public async Task<int> CountBankAmount()
         {
-            return _context.Banks.Count();
+            return await _context.Banks.CountAsync();
         }
 
-        public Bank CreateBank(Bank bank)
+        public async Task<Bank> CreateBank(Bank bank)
         {
-            _context.Banks.Add(bank);
-            _context.SaveChanges();
+            await _context.Banks.AddAsync(bank);
+            await _context.SaveChangesAsync();
             return bank;
         }
 
-        public Bank DeleteBank(Bank bank)
+        public async Task<Bank> DeleteBank(Bank bank)
         {
             _context.Banks.Remove(bank);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return bank;
         }
 
-        public Bank FindBankById(int id)
+        public async Task<Bank> FindBankById(int id)
         {
 #pragma warning disable CS8603
-            return _context.Banks.FirstOrDefault(b => b.Id == id);
+            return await _context.Banks.FirstOrDefaultAsync(b => b.Id == id);
 
         }
 
-        public IEnumerable<Bank> GetBanks(int currentPage, int perPage)
+        public async Task<IEnumerable<Bank>> GetBanks(int currentPage, int perPage)
         {
-            return _context.Banks
+            return await _context.Banks
         .OrderBy(b => b.Id)
         .Skip(currentPage * perPage)
         .Take(perPage)
-        .ToList();
+        .ToListAsync();
         }
 
-        public Bank UpdateBank(Bank bank, BankDto updatedBank)
+        public async Task<Bank> UpdateBank(Bank bank, BankDto updatedBank)
         {
             _context.Banks.Attach(bank);
 
@@ -57,7 +58,7 @@ namespace hangi_kredi_restful.Repository
             _context.Entry(bank).Property(e => e.Name).IsModified = true;
             _context.Entry(bank).Property(e => e.UpdatedAt).IsModified = true;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return bank;
         }

@@ -4,10 +4,10 @@ namespace hangi_kredi_restful.Services
 {
     public interface IBankService
     {
-        BankReturnType GetBanks(int currentPage, int perPage);
-        BankDto GetBankById(int id);
-        BankDto CreateBank(BankDto bank);
-        BankDto UpdateBank(int id, BankDto updatedBank);
-        BankDto DeleteBank(int id);
+        Task<BankReturnType> GetBanks(int currentPage, int perPage);
+        Task<BankDto> GetBankById(int id);
+        Task<BankDto> CreateBank(BankDto bank);
+        Task<BankDto> UpdateBank(int id, BankDto updatedBank);
+        Task<BankDto> DeleteBank(int id);
     }
 }

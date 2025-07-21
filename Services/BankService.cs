@@ -18,32 +18,32 @@ namespace hangi_kredi_restful.Services
             mapper = mapper_;
         }
 
-        public BankDto CreateBank(BankDto bank)
+        public async Task<BankDto> CreateBank(BankDto bank)
         {
             // convert dto to entity
             Bank bankAsEntity = mapper.Map<Bank>(bank);
             // send entity to repo also repo returns as entity so we need to reconvert this into dto
-            BankDto newBankAsDto = mapper.Map<BankDto>(bankRepository.CreateBank(bankAsEntity));
+            BankDto newBankAsDto = mapper.Map<BankDto>(await bankRepository.CreateBank(bankAsEntity));
             return newBankAsDto;
         }
 
-        public BankDto DeleteBank(int id)
+        public async Task<BankDto> DeleteBank(int id)
         {
             // first look is there bank by this id
-            Bank? bank = bankRepository.FindBankById(id);
+            Bank? bank = await bankRepository.FindBankById(id);
             return bank == null ? throw new Exception($"bank {id} could not founded.") : mapper.Map<BankDto>(bankRepository.DeleteBank(bank));
 
         }
 
-        public BankDto GetBankById(int id)
+        public async Task<BankDto> GetBankById(int id)
         {
-            Bank? bank = bankRepository.FindBankById(id);
+            Bank? bank = await bankRepository.FindBankById(id);
             return bank == null ? throw new Exception($"bank {id} could not founded.") : mapper.Map<BankDto>(bank);
         }
 
-        public BankReturnType GetBanks(int currentPage, int perPage)
+        public async Task<BankReturnType> GetBanks(int currentPage, int perPage)
         {
-            int totalBankAmount = bankRepository.CountBankAmount();
+            int totalBankAmount = await bankRepository.CountBankAmount();
 
             BankReturnType formattedBankItems = new()
             {
@@ -53,7 +53,7 @@ namespace hangi_kredi_restful.Services
                 PreviousPage = currentPage != 0 ? currentPage - 1 : null
             };
 
-            var banks = bankRepository.GetBanks(currentPage, perPage).ToList();
+            var banks = (await bankRepository.GetBanks(currentPage, perPage)).ToList();
             banks.ForEach(bank =>
             {
                 // convert items to dto from entity and add into formattedBankItems's banks
@@ -64,10 +64,10 @@ namespace hangi_kredi_restful.Services
 
         }
 
-        public BankDto UpdateBank(int id, BankDto updatedBank)
+        public async Task<BankDto> UpdateBank(int id, BankDto updatedBank)
         {
-            Bank? bank = bankRepository.FindBankById(id);
-            return bank == null ? throw new Exception($"bank {id} could not founded.") : mapper.Map<BankDto>(bankRepository.UpdateBank(bank, updatedBank));
+            Bank? bank = await bankRepository.FindBankById(id);
+            return bank == null ? throw new Exception($"bank {id} could not founded.") : mapper.Map<BankDto>(await bankRepository.UpdateBank(bank, updatedBank));
 
         }
     }
