@@ -18,11 +18,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 | `AddTransient` | Her ihtiyaç duyulduðunda (her injection'da) yeniden oluþturulur.                  |
  */
 builder.Services.AddScoped<IBankService, BankService>();
-builder.Services.AddScoped<IBankRepository, BankRepository>();
+builder.Services.AddScoped<ILoanService, LoanService>();
 
+builder.Services.AddScoped<IBankRepository, BankRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 
 // Auto mapper for bank entities and DTOs
-builder.Services.AddAutoMapper(typeof(BankProfile));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 builder.Services.AddControllers();

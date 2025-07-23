@@ -1,4 +1,4 @@
-﻿namespace hangi_kredi_restful.Models
+﻿namespace hangi_kredi_restful.Common
 {
     public class ApiResponse<T>
     {
