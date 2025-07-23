@@ -13,9 +13,9 @@ namespace hangi_kredi_restful.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Loan>> GetLoans()
+        public async Task<IEnumerable<Loan>> GetLoans(int id)
         {
-            return await _context.Loans.ToListAsync();
+            return await _context.Loans.Where(loan => loan.BankId == id).ToListAsync();
         }
     }
 }

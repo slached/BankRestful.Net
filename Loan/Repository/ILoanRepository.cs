@@ -5,6 +5,6 @@ namespace hangi_kredi_restful.Repository
 {
     public interface ILoanRepository
     {
-        public Task<IEnumerable<Loan>> GetLoans();
+        public Task<IEnumerable<Loan>> GetLoans(int id);
     }
 }

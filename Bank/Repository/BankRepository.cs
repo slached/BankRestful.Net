@@ -2,7 +2,7 @@
 using hangi_kredi_restful.Entities;
 using hangi_kredi_restful.Models;
 using Microsoft.EntityFrameworkCore;
-
+ 
 namespace hangi_kredi_restful.Repository
 {
     public class BankRepository : IBankRepository

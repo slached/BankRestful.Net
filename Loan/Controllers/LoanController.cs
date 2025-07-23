@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hangi_kredi_restful.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class LoanController : ControllerBase
     {
@@ -20,12 +20,12 @@ namespace hangi_kredi_restful.Controllers
             _service = service;
         }
 
-        [HttpGet("get")]
-        public async Task<ActionResult<ApiResponse<LoanReturnType>>> Get()
+        [HttpGet("get/{id}")]
+        public async Task<ActionResult<ApiResponse<LoanReturnType>>> Get(int id)
         {
             try
             {
-                ApiResponse<LoanReturnType> response = new() { Success = true, Data = await _service.GetBanks() };
+                ApiResponse<LoanReturnType> response = new() { Success = true, Data = await _service.GetBanks(id) };
                 return Ok(response);
             }
             catch (Exception e)

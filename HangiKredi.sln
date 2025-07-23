@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hangi_kredi_restful", "hangi_kredi_restful.csproj", "{13B6C215-042E-48B6-946D-C13F65F4E7E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangiKredi.API", "HangiKredi.API.csproj", "{13B6C215-042E-48B6-946D-C13F65F4E7E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangiKredi.Gateway", "..\HangiKredi.Gateway\HangiKredi.Gateway.csproj", "{F8259708-0119-4AB6-BDB9-4D7FADB36F63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{13B6C215-042E-48B6-946D-C13F65F4E7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13B6C215-042E-48B6-946D-C13F65F4E7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13B6C215-042E-48B6-946D-C13F65F4E7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8259708-0119-4AB6-BDB9-4D7FADB36F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8259708-0119-4AB6-BDB9-4D7FADB36F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8259708-0119-4AB6-BDB9-4D7FADB36F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8259708-0119-4AB6-BDB9-4D7FADB36F63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

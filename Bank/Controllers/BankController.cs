@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace hangi_kredi_restful.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class BankController : ControllerBase
     {
 
