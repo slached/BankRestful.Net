@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using HangiKredi.API.Loan.Exceptions;
 
 namespace hangi_kredi_restful.Entities
 {
@@ -23,5 +24,19 @@ namespace hangi_kredi_restful.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? UpdatedAt { get; set; }
+
+
+        // for test usage
+        public void IncreaseRate(decimal increaseRate)
+        {
+
+            if (increaseRate <= 0)
+            {
+                throw new LoanException("Increase rate could not be 0 or lower.", nameof(increaseRate));
+            }
+
+            this.Rate += increaseRate;
+        }
+
     }
 }

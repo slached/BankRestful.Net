@@ -16,7 +16,12 @@ public class LoanService : ILoanService
         mapper = _mapper;
     }
 
-    public async Task<LoanReturnType> GetBanks(int id)
+    public async Task CreateLoan(Loan loan)
+    {
+       await loanRepository.CreateLoan(loan);
+    }
+
+    public async Task<LoanReturnType> GetLoans(int id)
     {
         LoanReturnType loanReturnType = new() { Loans = [] };
         List<Loan> loans = (await loanRepository.GetLoans(id)).ToList();

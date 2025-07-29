@@ -25,7 +25,7 @@ namespace hangi_kredi_restful.Controllers
         {
             try
             {
-                ApiResponse<LoanReturnType> response = new() { Success = true, Data = await _service.GetBanks(id) };
+                ApiResponse<LoanReturnType> response = new() { Success = true, Data = await _service.GetLoans(id) };
                 return Ok(response);
             }
             catch (Exception e)
