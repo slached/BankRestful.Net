@@ -1,0 +1,70 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/Bank/get",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5057
+        }
+      ],
+      "UpstreamPathTemplate": "/bank",
+      "UpstreamHttpMethod": [ "GET" ],
+
+      "RateLimitOptions": {
+        // for except user
+        "WhiteList": "test",
+        "ClientWhitelist": [ "test" ],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 2
+      },
+
+      // jwt auth options demo auth schema identified in program.cs
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "DemoAuthSchema",
+        "AllowedScopes": []
+      }
+
+    },
+
+    {
+      "Key": "bank",
+      "DownstreamPathTemplate": "/api/v1/Bank/get/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5057
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Bank/get/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+    {
+      "Key": "loan",
+      "DownstreamPathTemplate": "/api/v1/Loan/get/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5057
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Loan/get/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ],
+
+  "Aggregates": [
+    {
+      "RouteKeys": [ "bank", "loan" ],
+      "UpstreamPathTemplate": "/bank-with-credits/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ]
+}
